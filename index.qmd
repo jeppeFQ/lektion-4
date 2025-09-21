@@ -269,6 +269,88 @@ I et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiser
 
 ::::
 
+---
+
+![](resources/git.png) 
+
+---
+
+![](resources/git2.jpg) 
+
+## Versionskontrol 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="font-size: 0.8em;"}
+"*A* **local version control system** *is a local database located on your local computer, in which every file change is stored as a patch. Every patch set contains only the changes made to the file since its last version. In order to see what the file looked like at any given moment, it is necessary to add up all the relevant patches to the file in order until that given moment.*
+
+*The main problem with this is that everything is stored locally. If anything were to happen to the local database, all the patches would be lost. If anything were to happen to a single version, all the changes made after that version would be lost.*
+
+*Also, collaborating with other developers or a team is very hard or nearly impossible.*"
+:::
+:::
+
+::: {.column width="50%"}
+
+![](resources/versionkontrol.png)
+
+:::
+
+
+::::
+
+
+
+---
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="font-size: 0.8em;"}
+"*A* **centralized version control system** *has a single server that contains all the file versions. This enables multiple clients to simultaneously access files on the server, pull them to their local computer or push them onto the server from their local computer. This way, everyone usually knows what everyone else on the project is doing. Administrators have control over who can do what.*
+
+*This allows for easy collaboration with other developers or a team.*
+
+*The biggest issue with this structure is that everything is stored on the centralized server. If something were to happen to that server, nobody can save their versioned changes, pull files or collaborate at all. Similar to Local Version Control, if the central database became corrupted, and backups haven't been kept, you lose the entire history of the project except whatever single snapshots people happen to have on their local machines.*"
+:::
+:::
+
+::: {.column width="50%"}
+
+![](resources/versionkontrol2.png)
+
+
+:::
+
+
+::::
+
+--- 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="font-size: 0.8em;"}
+"*With* **distributed version control systems**, *clients don’t just check out the latest snapshot of the files from the server, they fully mirror the repository, including its full history. Thus, everyone collaborating on a project owns a local copy of the whole project, i.e. owns their own local database with their own complete history.*
+
+*With this model, if the server becomes unavailable or dies, any of the client repositories can send a copy of the project's version to any other client or back onto the server when it becomes available. It is enough that one client contains a correct copy which can then easily be further distributed.*"
+:::
+:::
+
+::: {.column width="50%"}
+
+![](resources/versionkontrol3.png)
+
+
+:::
+
+::::
+
+---
+
+![](resources/git3.png) 
+
 ## Git i praksis
 
 Den “usynlige” .git mappe skaber vi med Git-kommandoen:
@@ -289,3 +371,43 @@ cd <absolut eller relativ stil>
 git init
 ```
 :::
+
+## Git i praksis
+
+*Versionsstyringsprocessen med afsæt i .git skelletet består af 3 stadier:*
+
+- **Working Directory:** den mappe, hvor vi kørte git init. Alt der ændres her spores af Git, men det gemmes (committes) ikke automatisk
+- **Staging Area:** De ændringer, som du ønsker registreret i næste commit bliver flyttet til et staging area ved git add .. Det er ikke som sådan et “sted”, men et snarer et “tag” til de filer, som Git skal gemme. Ingen ændringer er blevet gemt endnu.
+- **Repository:** Når vi bruger kommandoen git commit -m "besked" gemmes alt staged data i vores Git-repository og alle ændringer siden sidste commit bliver en permanent del af projektets versionshistorik.
+
+## Fælles øvelse 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="font-size: 0.8em;"}
+0. Opret en bruger på GitHub og hent GitHub Desktop
+1. Én i studiegrupper opretter et repository på GitHub
+2. Denne person laver følgende fil med koden: `print("Første commit")`
+3. Den næste kloner repositoriet ned på egen computer
+4. Ændrer koden til: `print("Første commit + anden commit")` og "pusher"
+5. Tredje person gør det samme, tilføjer: `print("Første commit + anden commit + tredje commit")`
+:::
+:::
+
+::: {.column width="50%"}
+
+```
+1. git pull     📥 (hent seneste ændringer)
+2. Arbejd       💻 (skriv kode)  
+3. git add      📋 (stage ændringer)
+4. git commit   💾 (gem lokalt)
+5. git push     📤 (del med andre)
+```
+:::
+
+::::
+
+*Hvis der er tid tilbage, så lav i studiegruppen et repository til jeres mini-projekt.* 
+
+

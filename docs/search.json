@@ -84,10 +84,31 @@
     "text": "Formål\nI et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.\nTænk på det som en avanceret “fortryd”-funktion for hele projekter.\n\n\n\n/projektarbejde\n└──/backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx\n\n/projektarbejde\n├── .git      &lt;- Git's skjulte data\n└── projekt.docx"
   },
   {
+    "objectID": "index.html#versionskontrol-1",
+    "href": "index.html#versionskontrol-1",
+    "title": "Git og versionskontrol",
+    "section": "Versionskontrol",
+    "text": "Versionskontrol\n\n\n\n“A local version control system is a local database located on your local computer, in which every file change is stored as a patch. Every patch set contains only the changes made to the file since its last version. In order to see what the file looked like at any given moment, it is necessary to add up all the relevant patches to the file in order until that given moment.\nThe main problem with this is that everything is stored locally. If anything were to happen to the local database, all the patches would be lost. If anything were to happen to a single version, all the changes made after that version would be lost.\nAlso, collaborating with other developers or a team is very hard or nearly impossible.”"
+  },
+  {
     "objectID": "index.html#git-i-praksis",
     "href": "index.html#git-i-praksis",
     "title": "Git og versionskontrol",
     "section": "Git i praksis",
     "text": "Git i praksis\nDen “usynlige” .git mappe skaber vi med Git-kommandoen:\n\ngit init\n\nKommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.\nI skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:\n\ncd &lt;absolut eller relativ stil&gt;\ngit init"
+  },
+  {
+    "objectID": "index.html#git-i-praksis-1",
+    "href": "index.html#git-i-praksis-1",
+    "title": "Git og versionskontrol",
+    "section": "Git i praksis",
+    "text": "Git i praksis\nVersionsstyringsprocessen med afsæt i .git skelletet består af 3 stadier:\n\nWorking Directory: den mappe, hvor vi kørte git init. Alt der ændres her spores af Git, men det gemmes (committes) ikke automatisk\nStaging Area: De ændringer, som du ønsker registreret i næste commit bliver flyttet til et staging area ved git add .. Det er ikke som sådan et “sted”, men et snarer et “tag” til de filer, som Git skal gemme. Ingen ændringer er blevet gemt endnu.\nRepository: Når vi bruger kommandoen git commit -m “besked” gemmes alt staged data i vores Git-repository og alle ændringer siden sidste commit bliver en permanent del af projektets versionshistorik."
+  },
+  {
+    "objectID": "index.html#fælles-øvelse",
+    "href": "index.html#fælles-øvelse",
+    "title": "Git og versionskontrol",
+    "section": "Fælles øvelse",
+    "text": "Fælles øvelse\n\n\n\n\nOpret en bruger på GitHub og hent GitHub Desktop\nÉn i studiegrupper opretter et repository på GitHub\nDenne person laver følgende fil med koden: print(\"Første commit\")\nDen næste kloner repositoriet ned på egen computer\nÆndrer koden til: print(\"Første commit + anden commit\") og “pusher”\nTredje person gør det samme, tilføjer: print(\"Første commit + anden commit + tredje commit\")\n\n\n\n1. git pull     📥 (hent seneste ændringer)\n2. Arbejd       💻 (skriv kode)  \n3. git add      📋 (stage ændringer)\n4. git commit   💾 (gem lokalt)\n5. git push     📤 (del med andre)\n\nHvis der er tid tilbage, så lav i studiegruppen et repository til jeres mini-projekt."
   }
 ]
