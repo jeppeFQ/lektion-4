@@ -1044,9 +1044,241 @@ Jeppe Fjeldgaard Qvist
 </section>
 <section id="dagens-program" class="slide level2">
 <h2>Dagens program</h2>
+<ul>
+<li>Filsystemer og -hierakier (delvis genopfriskning af de indledende forelæsninger)</li>
+<li>Git (Hvad er det?)</li>
+<li>Git (Hvordan bruger vi det?)</li>
+<li>Workshop (i studiegrupperne; opsætning af mini-projekter)</li>
+</ul>
+</section>
+<section id="lagring-af-data-på-en-computer" class="slide level2">
+<h2>Lagring af data på en computer</h2>
+<blockquote>
+<p>Hvad er en fil?</p>
+</blockquote>
+<p><span class="timer" data-time="120"></span></p>
+</section>
+<section class="slide level2">
 
+<p><em>En sekvens af data, gemt som en sammenhængende enhed:</em></p>
+<ul>
+<li>Binære data</li>
+<li>Tekst</li>
+<li>Programmer</li>
+<li>… osv.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><em>Filnavn og -udvidelse (fx projekt.docx):</em></p>
+<ul>
+<li><strong>Basenavn:</strong> projekt</li>
+<li><strong>Filudvidelse:</strong> <em>.docx</em>, angiver hvilken data filen indeholder og hvordan den skal læses</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><em>Metaelementer:</em></p>
+<ul>
+<li>Filstørrelse: “hvor mange bytes optager filen”</li>
+<li>Oprettelse- og ændringsdato</li>
+<li>Filens type</li>
+<li>Ejerskab</li>
+<li>Adgangsrettigheder</li>
+<li>… osv.</li>
+</ul>
+</section>
+<section id="filorganisering" class="slide level2">
+<h2>Fil<em>organisering</em></h2>
+<blockquote>
+<p>Spg.: Hvad vil det sige at filer er organiseret? Hvorfor er det nødvendigt? Og hvordan organisere I filer på jeres computer?</p>
+</blockquote>
+<p><span class="timer" data-time="240"></span></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>Referer til hvordan vores filer (data) og mapper (directories) er struktureret og lagret på vores lagringsenhed (harddisk, SSD, ekstern enhed, …).</p></li>
+<li><p>Denne struktur bestemmer hvordan data hentes og gemmes, og gør det muligt for brugeren eller programmer at finde, tilgå og anvende filer.</p></li>
+</ul>
+<p>Mao.: <em>Hvor skal computeren kigge, når den vil interagere med lagret data, og hvor skal den putte dataen hen når den er færdig med at interagere med den.</em></p>
+</section>
+<section id="mapper-grundlaget-for-organiseringen" class="slide level2">
+<h2>Mapper: grundlaget for organiseringen</h2>
+<ul>
+<li><p>En mappe (directory) er en container, som indeholder filer og andre mapper, og danner grundlaget for en hierakisk struktur (tree-/træstruktur).</p></li>
+<li><p>(Træ-)hierakiet giver en logisk og navigérbar organisering på computeren.</p></li>
+</ul>
+</section>
+<section id="hierakiske-strukturer" class="slide level2">
+<h2>Hierakiske strukturer</h2>
+<p><em>… en hierakisk struktur er derfor den almindelige måde at organisere filer og mapper i operativsystemer i dag.</em></p>
+<ul>
+<li>Opbygningen er med afsæt i en root-mappe, som indeholder undermapper og filer. Herfra indeholder hver undermappe andre undermapper og filer, hvilket danner et træ af mapper og filer, hvis vi zoomer ud.
+<ul>
+<li><strong>root directory</strong>: I Unix-systemer (MacOS, Linux) betegnes den /. I Windows er der en root-mappe i hvert drev, betegnet med bogstavet for drevet, fx C:<br>
+</li>
+<li><strong>Undermapper</strong>: Mapper, der findes inde i andre mapper, fx /home/user/documents eller C:.</li>
+</ul></li>
+</ul>
+</section>
+<section id="et-filsystem" class="slide level2">
+<h2>Et filsystem</h2>
+<div style="font-size: 0.7em;">
+<pre><code>UNIX (MacOS, Linux)
+
+/
+├── bin                  # Vigtige eksekverbare systemfiler
+├── sbin                 # Systemadministrative eksekverbare filer
+├── etc                  # Systemkonfigurationsfiler
+├── home                 # Brugermapper (personlige filer)
+│   └── jeppe            # Brugeren &quot;jeppe&quot;&#39;s hjemmemappe
+│       ├── Documents    # jeppes dokumenter
+│       ├── Downloads    # jeppes downloadede filer
+│       ├── Music        # jeppes musikfiler
+│       ├── Pictures     # jeppes billeder
+│       ├── Videos       # jeppes videofiler
+│       └── Projects     # Personlige kodeprojekter og scripts
+│           └── snake_game
+│               ├── main.py # Python-kode til et snake-spil
+│               └── assets  # Grafikfiler til spillet
+├── root                 # Superbrugerens hjemmemappe
+├── usr                  # Bruger- og systemprogrammer
+│   ├── bin              # Programmer installeret til brugere
+│   ├── lib              # Systemets biblioteker
+│   └── local            # Lokalt installerede programmer
+├── var                  # Variable data som logs og mails
+│   ├── log              # Systemets logfiler
+│   └── tmp              # Midlertidige filer
+├── tmp                  # Midlertidige filer (slettes ved genstart)
+├── dev                  # Systemets enheder som harddiske og terminaler
+├── mnt                  # Monteringspunkt for midlertidige enheder
+│   └── usb-drive        # En USB-nøgle monteret her
+└── media                # Monteringspunkt for eksterne enheder
+    └── jeppe-usb        # jeppes eksterne harddisk hvis monteret</code></pre>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="font-size: 0.7em;">
+<pre><code>Windows
+
+C:\
+├── Program Files            # Programmer installeret for alle brugere
+├── Program Files (x86)      # 32-bit versioner (på 64-bit systemer)
+├── Users                    # Brugermapper (til hver bruger på systemet)
+│   └── jeppe                # Brugeren &quot;jeppe&quot;&#39;s hjemmemappe
+│       ├── Documents        # jeppes dokumenter
+│       ├── Downloads        # jeppes downloadede filer
+│       ├── Music            # jeppes musikfiler
+│       ├── Pictures         # jeppes billeder
+│       ├── Videos           # jeppes videofiler
+│       ├── Desktop          # Filer og genveje på jeppes skrivebord
+│       ├── AppData          # jeppes personlige app-data og indstillinger
+│       └── Projects         # Personlige kodeprojekter og scripts
+│           └── snake_game
+│               ├── main.py  # Python-kode til et snake-spil
+│               └── assets   # Grafikfiler til spillet
+├── Windows                  # Operativsystemets filer
+│   ├── System32             # Vigtige systemfiler 
+│   └── Temp                 # Midlertidige filer, der bruges af systemet
+├── ProgramData              # Data, der deles af applikationer på systemet
+└── Temp                     # Midlertidige filer</code></pre>
+</div>
+</section>
+<section id="navigation-absolutte-og-relative-stier" class="slide level2">
+<h2><em>Navigation</em>: Absolutte og relative stier</h2>
+<ul>
+<li><strong>Absolut sti</strong>: En sti, der beskriver placeringen af en fil eller mappe i forhold til root-mappen. Fx /home/user/documents/projekt.docs eller C:.docx.</li>
+<li><strong>Relativ sti</strong>: En sti, der beskriver placeringen af en fil eller mappe i forhold til den nuværende mappe. Hvis vi er i mappen /home/user, kan vi nøjes med den relative sti documents/projekt.docx for at henvise til filen.</li>
+</ul>
+</section>
+<section id="terminalen-interaktion-med-computeren-og-filsystemet" class="slide level2">
+<h2><em>Terminalen</em>: interaktion med computeren (og filsystemet)</h2>
+<p><em>Terminalen</em> er det, der giver os adgang til <em>kommandolinjegrænsefladen</em> (<strong>CLI</strong>). Selvom den har miste meget af sin position blandt den gennemsnitlige computer-bruger, grundet fremkomsten ad <em>grafiske brugergrænseflader</em> (<strong>GUI</strong>), er den fortsat en meget effektiv måde at interagere med computeren. Særligt på Unix-systemer.</p>
+</section>
+<section class="slide level2">
+
+<p>Når vi anvender CLI, bruger vi en <code>shell</code>, der er et program til fortolkning af kommandoer. De to mest almindelige shell-programmer er:</p>
+<ul>
+<li><strong>Bash</strong> (Bourne Again Shell): Standard på mange Linux-distributioner og tidligere på macOS.</li>
+<li><strong>Zsh</strong> (Z Shell): Standard på macOS fra og med version 10.15 Catalina.</li>
+</ul>
+<p>For jer, vil der næppe komme en situation, hvor I vil opleve en forskel på de to. Begge kan tolke alle standard kommandoer. Zsh er dog ofte omtalt som mere brugervenligt og har flere muligheder for personliggørelse, men bash er mere end tilstrækkeligt.</p>
+</section>
+<section id="navigation-i-filsystemet-live" class="slide level2">
+<h2>Navigation i filsystemet (<em>live…</em>)</h2>
+<p>Er navigation med CML nødvendigt? <strong>Nej.</strong> Men det kan give et flow, hvis vi primært laver kodearbejde da terminalen kan tilgås “indeni” programmer som <code>Positron</code>.</p>
+<blockquote>
+<p><strong>Spg.</strong>: Hvorfor påstår jeg så at det ikke en god idé ikke at gemme filer på skrivebordet som default?</p>
+</blockquote>
+<p><span class="timer" data-time="120"></span></p>
+</section>
+<section>
+<section id="versionskontrol-installation-af-git-i-fællesskab" class="title-slide slide level1 center">
+<h1><em>Versionskontrol:</em> Installation af Git i fællesskab</h1>
 
 </section>
+<section id="git-og-organisering-af-arbejde" class="slide level2">
+<h2>Git og organisering af arbejde</h2>
+<div style="font-size: 1.5em;">
+<pre><code>/projektarbejde
+└──/backup
+    ├── projekt_281024.docx
+    ├── projekt_311024.docx
+    ├── projekt_041224.docx
+    ├── projekt_final.docx
+    ├── projekt_final2.docx
+    ├── projekt_final3.docx
+    ├── projekt_final_final.docx
+    └── projekt_FINAL.docx</code></pre>
+</div>
+</section>
+<section id="versionskontrol" class="slide level2">
+<h2>Versionskontrol</h2>
+<p>Versionkontrol er et system (software), der holder styr på ændringer af filer over tid, der gør det muligt at genskabe vores tidligere arbejde. Virker for (stort set) alle filer.</p>
+<p>På større projekter—hvor flere er involveret—er det vigtigt at have kontrol over, hvem der foretager ændringer, hvilke ændringer der er blevet foretaget, og hvordan man kan rulle tilbage til tidligere versioner, hvis noget går galt.</p>
+<p><em>“[Git] allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and more.”</em></p>
+</section>
+<section id="formål" class="slide level2">
+<h2>Formål</h2>
+<p>I et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.</p>
+<p><strong>Tænk på det som en avanceret “fortryd”-funktion for hele projekter.</strong></p>
+<div class="columns">
+<div style="font-size: 1.5em;">
+<div class="column" style="width:50%;">
+<pre><code>/projektarbejde
+└──/backup
+    ├── projekt_281024.docx
+    ├── projekt_311024.docx
+    ├── projekt_041224.docx
+    ├── projekt_final.docx
+    ├── projekt_final2.docx
+    ├── projekt_final3.docx
+    ├── projekt_final_final.docx
+    └── projekt_FINAL.docx</code></pre>
+</div><div class="column" style="width:50%;">
+<pre><code>/projektarbejde
+├── .git      &lt;- Git&#39;s skjulte data
+└── projekt.docx</code></pre>
+</div></div>
+</div>
+</section>
+<section id="git-i-praksis" class="slide level2">
+<h2>Git i praksis</h2>
+<p>Den “usynlige” .git mappe skaber vi med Git-kommandoen:</p>
+<div style="font-size: 1.5em;">
+<pre><code>git init</code></pre>
+</div>
+<p>Kommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.</p>
+<p><strong>I skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:</strong></p>
+<div style="font-size: 1.5em;">
+<pre><code>cd &lt;absolut eller relativ stil&gt;
+git init</code></pre>
+</div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

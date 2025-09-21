@@ -4,6 +4,90 @@
     "href": "index.html#dagens-program",
     "title": "Git og versionskontrol",
     "section": "Dagens program",
-    "text": "Dagens program"
+    "text": "Dagens program\n\nFilsystemer og -hierakier (delvis genopfriskning af de indledende forelæsninger)\nGit (Hvad er det?)\nGit (Hvordan bruger vi det?)\nWorkshop (i studiegrupperne; opsætning af mini-projekter)"
+  },
+  {
+    "objectID": "index.html#lagring-af-data-på-en-computer",
+    "href": "index.html#lagring-af-data-på-en-computer",
+    "title": "Git og versionskontrol",
+    "section": "Lagring af data på en computer",
+    "text": "Lagring af data på en computer\n\nHvad er en fil?"
+  },
+  {
+    "objectID": "index.html#filorganisering",
+    "href": "index.html#filorganisering",
+    "title": "Git og versionskontrol",
+    "section": "Filorganisering",
+    "text": "Filorganisering\n\nSpg.: Hvad vil det sige at filer er organiseret? Hvorfor er det nødvendigt? Og hvordan organisere I filer på jeres computer?"
+  },
+  {
+    "objectID": "index.html#mapper-grundlaget-for-organiseringen",
+    "href": "index.html#mapper-grundlaget-for-organiseringen",
+    "title": "Git og versionskontrol",
+    "section": "Mapper: grundlaget for organiseringen",
+    "text": "Mapper: grundlaget for organiseringen\n\nEn mappe (directory) er en container, som indeholder filer og andre mapper, og danner grundlaget for en hierakisk struktur (tree-/træstruktur).\n(Træ-)hierakiet giver en logisk og navigérbar organisering på computeren."
+  },
+  {
+    "objectID": "index.html#hierakiske-strukturer",
+    "href": "index.html#hierakiske-strukturer",
+    "title": "Git og versionskontrol",
+    "section": "Hierakiske strukturer",
+    "text": "Hierakiske strukturer\n… en hierakisk struktur er derfor den almindelige måde at organisere filer og mapper i operativsystemer i dag.\n\nOpbygningen er med afsæt i en root-mappe, som indeholder undermapper og filer. Herfra indeholder hver undermappe andre undermapper og filer, hvilket danner et træ af mapper og filer, hvis vi zoomer ud.\n\nroot directory: I Unix-systemer (MacOS, Linux) betegnes den /. I Windows er der en root-mappe i hvert drev, betegnet med bogstavet for drevet, fx C:\n\nUndermapper: Mapper, der findes inde i andre mapper, fx /home/user/documents eller C:."
+  },
+  {
+    "objectID": "index.html#et-filsystem",
+    "href": "index.html#et-filsystem",
+    "title": "Git og versionskontrol",
+    "section": "Et filsystem",
+    "text": "Et filsystem\n\nUNIX (MacOS, Linux)\n\n/\n├── bin                  # Vigtige eksekverbare systemfiler\n├── sbin                 # Systemadministrative eksekverbare filer\n├── etc                  # Systemkonfigurationsfiler\n├── home                 # Brugermapper (personlige filer)\n│   └── jeppe            # Brugeren \"jeppe\"'s hjemmemappe\n│       ├── Documents    # jeppes dokumenter\n│       ├── Downloads    # jeppes downloadede filer\n│       ├── Music        # jeppes musikfiler\n│       ├── Pictures     # jeppes billeder\n│       ├── Videos       # jeppes videofiler\n│       └── Projects     # Personlige kodeprojekter og scripts\n│           └── snake_game\n│               ├── main.py # Python-kode til et snake-spil\n│               └── assets  # Grafikfiler til spillet\n├── root                 # Superbrugerens hjemmemappe\n├── usr                  # Bruger- og systemprogrammer\n│   ├── bin              # Programmer installeret til brugere\n│   ├── lib              # Systemets biblioteker\n│   └── local            # Lokalt installerede programmer\n├── var                  # Variable data som logs og mails\n│   ├── log              # Systemets logfiler\n│   └── tmp              # Midlertidige filer\n├── tmp                  # Midlertidige filer (slettes ved genstart)\n├── dev                  # Systemets enheder som harddiske og terminaler\n├── mnt                  # Monteringspunkt for midlertidige enheder\n│   └── usb-drive        # En USB-nøgle monteret her\n└── media                # Monteringspunkt for eksterne enheder\n    └── jeppe-usb        # jeppes eksterne harddisk hvis monteret"
+  },
+  {
+    "objectID": "index.html#navigation-absolutte-og-relative-stier",
+    "href": "index.html#navigation-absolutte-og-relative-stier",
+    "title": "Git og versionskontrol",
+    "section": "Navigation: Absolutte og relative stier",
+    "text": "Navigation: Absolutte og relative stier\n\nAbsolut sti: En sti, der beskriver placeringen af en fil eller mappe i forhold til root-mappen. Fx /home/user/documents/projekt.docs eller C:.docx.\nRelativ sti: En sti, der beskriver placeringen af en fil eller mappe i forhold til den nuværende mappe. Hvis vi er i mappen /home/user, kan vi nøjes med den relative sti documents/projekt.docx for at henvise til filen."
+  },
+  {
+    "objectID": "index.html#terminalen-interaktion-med-computeren-og-filsystemet",
+    "href": "index.html#terminalen-interaktion-med-computeren-og-filsystemet",
+    "title": "Git og versionskontrol",
+    "section": "Terminalen: interaktion med computeren (og filsystemet)",
+    "text": "Terminalen: interaktion med computeren (og filsystemet)\nTerminalen er det, der giver os adgang til kommandolinjegrænsefladen (CLI). Selvom den har miste meget af sin position blandt den gennemsnitlige computer-bruger, grundet fremkomsten ad grafiske brugergrænseflader (GUI), er den fortsat en meget effektiv måde at interagere med computeren. Særligt på Unix-systemer."
+  },
+  {
+    "objectID": "index.html#navigation-i-filsystemet-live",
+    "href": "index.html#navigation-i-filsystemet-live",
+    "title": "Git og versionskontrol",
+    "section": "Navigation i filsystemet (live…)",
+    "text": "Navigation i filsystemet (live…)\nEr navigation med CML nødvendigt? Nej. Men det kan give et flow, hvis vi primært laver kodearbejde da terminalen kan tilgås “indeni” programmer som Positron.\n\nSpg.: Hvorfor påstår jeg så at det ikke en god idé ikke at gemme filer på skrivebordet som default?"
+  },
+  {
+    "objectID": "index.html#git-og-organisering-af-arbejde",
+    "href": "index.html#git-og-organisering-af-arbejde",
+    "title": "Git og versionskontrol",
+    "section": "Git og organisering af arbejde",
+    "text": "Git og organisering af arbejde\n\n/projektarbejde\n└──/backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx"
+  },
+  {
+    "objectID": "index.html#versionskontrol",
+    "href": "index.html#versionskontrol",
+    "title": "Git og versionskontrol",
+    "section": "Versionskontrol",
+    "text": "Versionskontrol\nVersionkontrol er et system (software), der holder styr på ændringer af filer over tid, der gør det muligt at genskabe vores tidligere arbejde. Virker for (stort set) alle filer.\nPå større projekter—hvor flere er involveret—er det vigtigt at have kontrol over, hvem der foretager ændringer, hvilke ændringer der er blevet foretaget, og hvordan man kan rulle tilbage til tidligere versioner, hvis noget går galt.\n“[Git] allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and more.”"
+  },
+  {
+    "objectID": "index.html#formål",
+    "href": "index.html#formål",
+    "title": "Git og versionskontrol",
+    "section": "Formål",
+    "text": "Formål\nI et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.\nTænk på det som en avanceret “fortryd”-funktion for hele projekter.\n\n\n\n/projektarbejde\n└──/backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx\n\n/projektarbejde\n├── .git      &lt;- Git's skjulte data\n└── projekt.docx"
+  },
+  {
+    "objectID": "index.html#git-i-praksis",
+    "href": "index.html#git-i-praksis",
+    "title": "Git og versionskontrol",
+    "section": "Git i praksis",
+    "text": "Git i praksis\nDen “usynlige” .git mappe skaber vi med Git-kommandoen:\n\ngit init\n\nKommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.\nI skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:\n\ncd &lt;absolut eller relativ stil&gt;\ngit init"
   }
 ]

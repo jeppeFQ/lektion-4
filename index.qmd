@@ -40,3 +40,252 @@ format:
 ---
 
 ## Dagens program
+
+* Filsystemer og -hierakier (delvis genopfriskning af de indledende forelæsninger)
+* Git (Hvad er det?)
+* Git (Hvordan bruger vi det?)
+* Workshop (i studiegrupperne; opsætning af mini-projekter)
+
+## Lagring af data på en computer 
+
+> Hvad er en fil? 
+
+<span class="timer" data-time="120"></span>
+
+---
+
+*En sekvens af data, gemt som en sammenhængende enhed:*
+
+* Binære data
+* Tekst
+* Programmer
+* ... osv. 
+
+---
+
+*Filnavn og -udvidelse (fx projekt.docx):*
+
+* **Basenavn:** projekt
+* **Filudvidelse:** *.docx*, angiver hvilken data filen indeholder og hvordan den skal læses
+
+---
+
+*Metaelementer:*
+
+* Filstørrelse: "hvor mange bytes optager filen"
+* Oprettelse- og ændringsdato
+* Filens type
+* Ejerskab
+* Adgangsrettigheder
+* ... osv. 
+
+## Fil*organisering*
+
+> Spg.: Hvad vil det sige at filer er organiseret? Hvorfor er det nødvendigt? Og hvordan organisere I filer på jeres computer? 
+
+<span class="timer" data-time="240"></span>
+
+---
+
+* Referer til hvordan vores filer (data) og mapper (directories) er struktureret og lagret på vores lagringsenhed (harddisk, SSD, ekstern enhed, …).
+
+* Denne struktur bestemmer hvordan data hentes og gemmes, og gør det muligt for brugeren eller programmer at finde, tilgå og anvende filer.
+
+
+
+Mao.: *Hvor skal computeren kigge, når den vil interagere med lagret data, og hvor skal den putte dataen hen når den er færdig med at interagere med den.*
+
+## Mapper: grundlaget for organiseringen
+
+* En mappe (directory) er en container, som indeholder filer og andre mapper, og danner grundlaget for en hierakisk struktur (tree-/træstruktur).
+
+* (Træ-)hierakiet giver en logisk og navigérbar organisering på computeren.
+
+## Hierakiske strukturer
+
+*… en hierakisk struktur er derfor den almindelige måde at organisere filer og mapper i operativsystemer i dag.*
+
+* Opbygningen er med afsæt i en root-mappe, som indeholder undermapper og filer. Herfra indeholder hver undermappe andre undermapper og filer, hvilket danner et træ af mapper og filer, hvis vi zoomer ud.
+  - **root directory**: I Unix-systemer (MacOS, Linux) betegnes den /. I Windows er der en root-mappe i hvert drev, betegnet med bogstavet for drevet, fx C:\
+  - **Undermapper**: Mapper, der findes inde i andre mapper, fx /home/user/documents eller C:\Users\Username\Documents.
+
+## Et filsystem
+
+::: {style="font-size: 0.7em;"}
+```
+UNIX (MacOS, Linux)
+
+/
+├── bin                  # Vigtige eksekverbare systemfiler
+├── sbin                 # Systemadministrative eksekverbare filer
+├── etc                  # Systemkonfigurationsfiler
+├── home                 # Brugermapper (personlige filer)
+│   └── jeppe            # Brugeren "jeppe"'s hjemmemappe
+│       ├── Documents    # jeppes dokumenter
+│       ├── Downloads    # jeppes downloadede filer
+│       ├── Music        # jeppes musikfiler
+│       ├── Pictures     # jeppes billeder
+│       ├── Videos       # jeppes videofiler
+│       └── Projects     # Personlige kodeprojekter og scripts
+│           └── snake_game
+│               ├── main.py # Python-kode til et snake-spil
+│               └── assets  # Grafikfiler til spillet
+├── root                 # Superbrugerens hjemmemappe
+├── usr                  # Bruger- og systemprogrammer
+│   ├── bin              # Programmer installeret til brugere
+│   ├── lib              # Systemets biblioteker
+│   └── local            # Lokalt installerede programmer
+├── var                  # Variable data som logs og mails
+│   ├── log              # Systemets logfiler
+│   └── tmp              # Midlertidige filer
+├── tmp                  # Midlertidige filer (slettes ved genstart)
+├── dev                  # Systemets enheder som harddiske og terminaler
+├── mnt                  # Monteringspunkt for midlertidige enheder
+│   └── usb-drive        # En USB-nøgle monteret her
+└── media                # Monteringspunkt for eksterne enheder
+    └── jeppe-usb        # jeppes eksterne harddisk hvis monteret
+```
+:::
+
+---
+
+
+::: {style="font-size: 0.7em;"}
+```
+Windows
+
+C:\
+├── Program Files            # Programmer installeret for alle brugere
+├── Program Files (x86)      # 32-bit versioner (på 64-bit systemer)
+├── Users                    # Brugermapper (til hver bruger på systemet)
+│   └── jeppe                # Brugeren "jeppe"'s hjemmemappe
+│       ├── Documents        # jeppes dokumenter
+│       ├── Downloads        # jeppes downloadede filer
+│       ├── Music            # jeppes musikfiler
+│       ├── Pictures         # jeppes billeder
+│       ├── Videos           # jeppes videofiler
+│       ├── Desktop          # Filer og genveje på jeppes skrivebord
+│       ├── AppData          # jeppes personlige app-data og indstillinger
+│       └── Projects         # Personlige kodeprojekter og scripts
+│           └── snake_game
+│               ├── main.py  # Python-kode til et snake-spil
+│               └── assets   # Grafikfiler til spillet
+├── Windows                  # Operativsystemets filer
+│   ├── System32             # Vigtige systemfiler 
+│   └── Temp                 # Midlertidige filer, der bruges af systemet
+├── ProgramData              # Data, der deles af applikationer på systemet
+└── Temp                     # Midlertidige filer
+```
+:::
+
+
+## *Navigation*: Absolutte og relative stier
+
+* **Absolut sti**: En sti, der beskriver placeringen af en fil eller mappe i forhold til root-mappen. Fx /home/user/documents/projekt.docs eller C:\Users\Username\Documents\projekt.docx.
+* **Relativ sti**: En sti, der beskriver placeringen af en fil eller mappe i forhold til den nuværende mappe. Hvis vi er i mappen /home/user, kan vi nøjes med den relative sti documents/projekt.docx for at henvise til filen.
+
+## *Terminalen*: interaktion med computeren (og filsystemet)
+
+*Terminalen* er det, der giver os adgang til *kommandolinjegrænsefladen* (**CLI**). Selvom den har miste meget af sin position blandt den gennemsnitlige computer-bruger, grundet fremkomsten ad *grafiske brugergrænseflader* (**GUI**), er den fortsat en meget effektiv måde at interagere med computeren. Særligt på Unix-systemer.
+
+---
+
+Når vi anvender CLI, bruger vi en `shell`, der er et program til fortolkning af kommandoer. De to mest almindelige shell-programmer er:
+
+* **Bash** (Bourne Again Shell): Standard på mange Linux-distributioner og tidligere på macOS.
+* **Zsh** (Z Shell): Standard på macOS fra og med version 10.15 Catalina.
+
+For jer, vil der næppe komme en situation, hvor I vil opleve en forskel på de to. Begge kan tolke alle standard kommandoer. Zsh er dog ofte omtalt som mere brugervenligt og har flere muligheder for personliggørelse, men bash er mere end tilstrækkeligt.
+
+
+## Navigation i filsystemet (*live…*)
+
+Er navigation med CML nødvendigt? **Nej.** Men det kan give et flow, hvis vi primært laver kodearbejde da terminalen kan tilgås “indeni” programmer som `Positron`.
+
+> **Spg.**: Hvorfor påstår jeg så at det ikke en god idé ikke at gemme filer på skrivebordet som default?
+
+<span class="timer" data-time="120"></span>
+
+
+# *Versionskontrol:* Installation af Git i fællesskab
+
+## Git og organisering af arbejde
+
+::: {style="font-size: 1.5em;"}
+```
+/projektarbejde
+└──/backup
+    ├── projekt_281024.docx
+    ├── projekt_311024.docx
+    ├── projekt_041224.docx
+    ├── projekt_final.docx
+    ├── projekt_final2.docx
+    ├── projekt_final3.docx
+    ├── projekt_final_final.docx
+    └── projekt_FINAL.docx
+```
+:::
+
+## Versionskontrol
+
+Versionkontrol er et system (software), der holder styr på ændringer af filer over tid, der gør det muligt at genskabe vores tidligere arbejde. Virker for (stort set) alle filer.
+
+På større projekter—hvor flere er involveret—er det vigtigt at have kontrol over, hvem der foretager ændringer, hvilke ændringer der er blevet foretaget, og hvordan man kan rulle tilbage til tidligere versioner, hvis noget går galt.
+
+*“[Git] allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and more.”*
+
+## Formål
+
+I et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.
+
+**Tænk på det som en avanceret "fortryd"-funktion for hele projekter.**
+
+:::: {.columns}
+
+::: {style="font-size: 1.5em;"}
+::: {.column width="50%"}
+```
+/projektarbejde
+└──/backup
+    ├── projekt_281024.docx
+    ├── projekt_311024.docx
+    ├── projekt_041224.docx
+    ├── projekt_final.docx
+    ├── projekt_final2.docx
+    ├── projekt_final3.docx
+    ├── projekt_final_final.docx
+    └── projekt_FINAL.docx
+```
+:::
+
+::: {.column width="50%"}
+```
+/projektarbejde
+├── .git      <- Git's skjulte data
+└── projekt.docx
+```
+:::
+:::
+
+::::
+
+## Git i praksis
+
+Den “usynlige” .git mappe skaber vi med Git-kommandoen:
+
+::: {style="font-size: 1.5em;"}
+```
+git init
+```
+:::
+
+Kommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.
+
+***I skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:***
+
+::: {style="font-size: 1.5em;"}
+```
+cd <absolut eller relativ stil>
+git init
+```
+:::
