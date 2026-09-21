@@ -1,220 +1,140 @@
 ---
-title: "Git og versionskontrol"
-subtitle: ""
+title: "Lektion 3"
+subtitle: "Git og versionskontrol"
 author: "Jeppe Fjeldgaard Qvist"
 date: today
+engine: knitr
 format: 
-  revealjs:
+  live-revealjs:
+    css:
+      - resources/kode-layout.css
     include-after-body: "resources/timer.html"
     navigation-mode: linear
     slide-number: c
     show-slide-number: print
-    embed-resources: true
-    self-contained-math: true
     smaller: true
     scrollable: true
     theme: default
-    include-in-header: 
-      - text: |
-          <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-          <style>
-          .reveal {
-            font-family: "Libre Baskerville", serif !important;
-          }
-          .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-            font-family: "Libre Baskerville", serif !important;
-          }
-          .reveal .slides section {
-            overflow: visible !important;
-          }
-          .reveal ul, .reveal ol {
-            margin: 0.5em 0;
-            padding-left: 1.5em;
-            overflow: visible !important;
-          }
-          .reveal li {
-            margin-bottom: 0.25em;
-            overflow: visible !important;
-          }
-          </style>
 ---
+
+<!--- 
+mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
+  quarto add r-wasm/quarto-live; \
+  mv .qmd-pause/* . && rmdir .qmd-pause
+----->
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Dagens program
 
-* Filsystemer og -hierakier (delvis genopfriskning af de indledende forelæsninger)
-* Git (Hvad er det?)
-* Git (Hvordan bruger vi det?)
-* Workshop (i studiegrupperne; opsætning af mini-projekter)
+1. **Filsystemet**: kort genopfriskning fra lektion 1/2. Det er dét, Git holder øje med
 
-## Lagring af data på en computer 
+2. **Versionskontrol**: hvad er det, og hvorfor
 
-> Hvad er en fil? 
+3. **Git i praksis**: de fem kommandoer, I skal bruge, og det samme i VS Code
 
-<span class="timer" data-time="120"></span>
+4. **Fork og pull request**: at arbejde i andres kode
 
----
+5. **Workshop**: I henter og tilføjer jer til vores mini-projekt, laver jeres eget repository og fortsætter med Python-øvelserne dér
 
-*En sekvens af data, gemt som en sammenhængende enhed:*
+# Filsystemet
 
-* Binære data
-* Tekst
-* Programmer
-* ... osv. 
+## Hvad er en fil?
 
----
+En sekvens af data, gemt som en samlet enhed: tekst, billeder, programmer, notebooks. Og som vi så i lektion 1, under overfladen er det hele **bytes**.
 
-*Filnavn og -udvidelse (fx projekt.docx):*
+- **Filnavn og filendelse**, fx `projekt.docx`
+  - basenavn: `projekt`
+  - endelse: `.docx`, fortæller hvilken slags data filen indeholder, og hvilket program der skal læse den
 
-* **Basenavn:** projekt
-* **Filudvidelse:** *.docx*, angiver hvilken data filen indeholder og hvordan den skal læses
+- **Metadata**: størrelse i bytes, oprettelses- og ændringsdato, ejer og adgangsrettigheder, osv.
 
----
+<br>
 
-*Metaelementer:*
+## Mapper er et træ
 
-* Filstørrelse: "hvor mange bytes optager filen"
-* Oprettelse- og ændringsdato
-* Filens type
-* Ejerskab
-* Adgangsrettigheder
-* ... osv. 
+En mappe er en container til filer og andre mapper. Øverst står **roden**: `/` på macOS og Linux, et drevbogstav som `C:\` på Windows.
 
-## Fil*organisering*
+:::: {.columns}
+::: {.column width="50%"}
+**macOS**
 
-> Spg.: Hvad vil det sige at filer er organiseret? Hvorfor er det nødvendigt? Og hvordan organisere I filer på jeres computer? 
-
-<span class="timer" data-time="240"></span>
-
----
-
-* Referer til hvordan vores filer (data) og mapper (directories) er struktureret og lagret på vores lagringsenhed (harddisk, SSD, ekstern enhed, …).
-
-* Denne struktur bestemmer hvordan data hentes og gemmes, og gør det muligt for brugeren eller programmer at finde, tilgå og anvende filer.
-
-
-
-Mao.: *Hvor skal computeren kigge, når den vil interagere med lagret data, og hvor skal den putte dataen hen når den er færdig med at interagere med den.*
-
-## Mapper: grundlaget for organiseringen
-
-* En mappe (directory) er en container, som indeholder filer og andre mapper, og danner grundlaget for en hierakisk struktur (tree-/træstruktur).
-
-* (Træ-)hierakiet giver en logisk og navigérbar organisering på computeren.
-
-## Hierakiske strukturer
-
-*… en hierakisk struktur er derfor den almindelige måde at organisere filer og mapper i operativsystemer i dag.*
-
-* Opbygningen er med afsæt i en root-mappe, som indeholder undermapper og filer. Herfra indeholder hver undermappe andre undermapper og filer, hvilket danner et træ af mapper og filer, hvis vi zoomer ud.
-  - **root directory**: I Unix-systemer (MacOS, Linux) betegnes den /. I Windows er der en root-mappe i hvert drev, betegnet med bogstavet for drevet, fx C:\
-  - **Undermapper**: Mapper, der findes inde i andre mapper, fx /home/user/documents eller C:\Users\Username\Documents.
-
-## Et filsystem
-
-::: {style="font-size: 0.7em;"}
 ```
-UNIX (MacOS, Linux)
-
 /
-├── bin                  # Vigtige eksekverbare systemfiler
-├── sbin                 # Systemadministrative eksekverbare filer
-├── etc                  # Systemkonfigurationsfiler
-├── home                 # Brugermapper (personlige filer)
-│   └── jeppe            # Brugeren "jeppe"'s hjemmemappe
-│       ├── Documents    # jeppes dokumenter
-│       ├── Downloads    # jeppes downloadede filer
-│       ├── Music        # jeppes musikfiler
-│       ├── Pictures     # jeppes billeder
-│       ├── Videos       # jeppes videofiler
-│       └── Projects     # Personlige kodeprojekter og scripts
-│           └── snake_game
-│               ├── main.py # Python-kode til et snake-spil
-│               └── assets  # Grafikfiler til spillet
-├── root                 # Superbrugerens hjemmemappe
-├── usr                  # Bruger- og systemprogrammer
-│   ├── bin              # Programmer installeret til brugere
-│   ├── lib              # Systemets biblioteker
-│   └── local            # Lokalt installerede programmer
-├── var                  # Variable data som logs og mails
-│   ├── log              # Systemets logfiler
-│   └── tmp              # Midlertidige filer
-├── tmp                  # Midlertidige filer (slettes ved genstart)
-├── dev                  # Systemets enheder som harddiske og terminaler
-├── mnt                  # Monteringspunkt for midlertidige enheder
-│   └── usb-drive        # En USB-nøgle monteret her
-└── media                # Monteringspunkt for eksterne enheder
-    └── jeppe-usb        # jeppes eksterne harddisk hvis monteret
+└── Users
+    └── jeppe
+        ├── Desktop
+        ├── Documents
+        │   └── 1-bid
+        │       ├── 01-variable.ipynb
+        │       └── data
+        │           └── salg.csv
+        └── Downloads
 ```
 :::
 
----
+::: {.column width="50%"}
+**Windows**
 
-
-::: {style="font-size: 0.7em;"}
 ```
-Windows
-
 C:\
-├── Program Files            # Programmer installeret for alle brugere
-├── Program Files (x86)      # 32-bit versioner (på 64-bit systemer)
-├── Users                    # Brugermapper (til hver bruger på systemet)
-│   └── jeppe                # Brugeren "jeppe"'s hjemmemappe
-│       ├── Documents        # jeppes dokumenter
-│       ├── Downloads        # jeppes downloadede filer
-│       ├── Music            # jeppes musikfiler
-│       ├── Pictures         # jeppes billeder
-│       ├── Videos           # jeppes videofiler
-│       ├── Desktop          # Filer og genveje på jeppes skrivebord
-│       ├── AppData          # jeppes personlige app-data og indstillinger
-│       └── Projects         # Personlige kodeprojekter og scripts
-│           └── snake_game
-│               ├── main.py  # Python-kode til et snake-spil
-│               └── assets   # Grafikfiler til spillet
-├── Windows                  # Operativsystemets filer
-│   ├── System32             # Vigtige systemfiler 
-│   └── Temp                 # Midlertidige filer, der bruges af systemet
-├── ProgramData              # Data, der deles af applikationer på systemet
-└── Temp                     # Midlertidige filer
+└── Users
+    └── jeppe
+        ├── Desktop
+        ├── Documents
+        │   └── 1-bid
+        │       ├── 01-variable.ipynb
+        │       └── data
+        │           └── salg.csv
+        └── Downloads
 ```
 :::
+::::
 
+## Absolutte og relative stier
 
-## *Navigation*: Absolutte og relative stier
+**Absolut sti**: fra root-mappen og hele vejen ned:
 
-* **Absolut sti**: En sti, der beskriver placeringen af en fil eller mappe i forhold til root-mappen. Fx /home/user/documents/projekt.docs eller C:\Users\Username\Documents\projekt.docx.
-* **Relativ sti**: En sti, der beskriver placeringen af en fil eller mappe i forhold til den nuværende mappe. Hvis vi er i mappen /home/user, kan vi nøjes med den relative sti documents/projekt.docx for at henvise til filen.
+```
+/Users/jeppe/Documents/1-bid/data/salg.csv
+C:\Users\jeppe\Documents\1-bid\data\salg.csv
+```
 
-## *Terminalen*: interaktion med computeren (og filsystemet)
+**Relativ sti**: fra dér, hvor man står. Står notebooken i `1-bid`, er det nok at skrive:
 
-*Terminalen* er det, der giver os adgang til *kommandolinjegrænsefladen* (**CLI**). Selvom den har miste meget af sin position blandt den gennemsnitlige computer-bruger, grundet fremkomsten ad *grafiske brugergrænseflader* (**GUI**), er den fortsat en meget effektiv måde at interagere med computeren. Særligt på Unix-systemer.
+```
+data/salg.csv
+```
 
----
+<br>
 
-Når vi anvender CLI, bruger vi en `shell`, der er et program til fortolkning af kommandoer. De to mest almindelige shell-programmer er:
+::: {.fragment}
+Relative stier er det, der gør et projekt **flytbart**. En notebook, der læser `data/salg.csv`, virker også på en andens computer, hvis de har hentet hele mappen `1-bid`. En notebook, der læser `/Users/jeppe/…`, virker kun hos mig. Det bliver afgørende, når I deler kode via Git.
+:::
 
-* **Bash** (Bourne Again Shell): Standard på mange Linux-distributioner og tidligere på macOS.
-* **Zsh** (Z Shell): Standard på macOS fra og med version 10.15 Catalina.
+## Hvor lægger I jeres filer?
 
-For jer, vil der næppe komme en situation, hvor I vil opleve en forskel på de to. Begge kan tolke alle standard kommandoer. Zsh er dog ofte omtalt som mere brugervenligt og har flere muligheder for personliggørelse, men bash er mere end tilstrækkeligt.
+<span class="timer" data-time="180"></span>
 
+::: {.incremental}
 
-## Navigation i filsystemet (*live…*)
+- Hvordan ser jeres mappestruktur ud til studiet? Kan I finde en fil fra første semester på under ti sekunder?
 
-Er navigation med CML nødvendigt? **Nej.** Men det kan give et flow, hvis vi primært laver kodearbejde da terminalen kan tilgås “indeni” programmer som `Positron`.
+- Hvorfor er skrivebordet et dårligt sted til et kodeprojekt?
 
-> **Spg.**: Hvorfor påstår jeg så at det ikke en god idé ikke at gemme filer på skrivebordet som default?
+:::
 
-<span class="timer" data-time="120"></span>
+::: {.aside}
+Et hint til det sidste: på mange computere bliver skrivebordet synkroniseret til iCloud eller OneDrive. En synkroniseringstjeneste og Git, der begge prøver at holde styr på de samme filer kan give nogle svært gennemskuelige problemer, der kan koste meget tid på Google/Chatten ... 
+:::
 
+# Versionskontrol
 
-# *Versionskontrol:* Installation af Git i fællesskab
+## Kender I den her?
 
-## Git og organisering af arbejde
-
-::: {style="font-size: 1.5em;"}
 ```
 /projektarbejde
-└──/backup
+└── backup
     ├── projekt_281024.docx
     ├── projekt_311024.docx
     ├── projekt_041224.docx
@@ -224,190 +144,346 @@ Er navigation med CML nødvendigt? **Nej.** Men det kan give et flow, hvis vi pr
     ├── projekt_final_final.docx
     └── projekt_FINAL.docx
 ```
+
+::: {.incremental}
+
+- Hvilken er den nyeste?
+- Hvad er forskellen på `final2` og `final3`?
+- Hvem skrev afsnit 4 om, og hvorfor?
+
 :::
 
 ## Versionskontrol
 
-Versionkontrol er et system (software), der holder styr på ændringer af filer over tid, der gør det muligt at genskabe vores tidligere arbejde. Virker for (stort set) alle filer.
+Et system, der holder styr på ændringer i filer over tid, så man kan komme tilbage til en tidligere udgave.
 
-På større projekter—hvor flere er involveret—er det vigtigt at have kontrol over, hvem der foretager ændringer, hvilke ændringer der er blevet foretaget, og hvordan man kan rulle tilbage til tidligere versioner, hvis noget går galt.
-
-*“[Git] allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and more.”*
-
-## Formål
-
-I et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.
-
-**Tænk på det som en avanceret "fortryd"-funktion for hele projekter.**
+Med Git kan man rulle enkelte filer eller hele projektet tilbage, sammenligne udgaver, og se hvem der ændrede hvad og hvornår (Chacon & Straub, *Pro Git*, kap. 1).
 
 :::: {.columns}
-
-::: {style="font-size: 1.5em;"}
 ::: {.column width="50%"}
+**Før**
+
 ```
 /projektarbejde
-└──/backup
-    ├── projekt_281024.docx
-    ├── projekt_311024.docx
-    ├── projekt_041224.docx
+└── backup
     ├── projekt_final.docx
     ├── projekt_final2.docx
-    ├── projekt_final3.docx
     ├── projekt_final_final.docx
     └── projekt_FINAL.docx
 ```
 :::
 
 ::: {.column width="50%"}
+**Med Git**
+
 ```
 /projektarbejde
-├── .git      <- Git's skjulte data
-└── projekt.docx
+├── .git          ← hele historikken
+└── projekt.docx  ← kun én fil
 ```
 :::
-:::
-
 ::::
 
----
+Tænk på det som en **fortryd-knap for hele projektet**, med en logbog over, hvem der trykkede.
 
-![](resources/git.png) 
+## Tre måder at gøre det på
 
----
+![](resources/fig-vcs-modeller.svg){width="95%" fig-align="center"}
 
-![](resources/git2.jpg) 
+::: {.incremental}
 
-## Versionskontrol 
+- **Lokal**: hver fil får sin historik på din egen maskine. Svært at samarbejde, og dør disken, dør historikken.
+
+- **Central**: én server har historikken, alle andre henter derfra. Nemt at samarbejde, indtil serveren går ned.
+
+- **Distribueret**: alle har en fuld kopi af hele historikken. Git er distribueret.
+
+:::
+
+## Git er ikke GitHub
 
 :::: {.columns}
-
 ::: {.column width="50%"}
-::: {style="font-size: 0.8em;"}
-"*A* **local version control system** *is a local database located on your local computer, in which every file change is stored as a patch. Every patch set contains only the changes made to the file since its last version. In order to see what the file looked like at any given moment, it is necessary to add up all the relevant patches to the file in order until that given moment.*
+#### Git
 
-*The main problem with this is that everything is stored locally. If anything were to happen to the local database, all the patches would be lost. If anything were to happen to a single version, all the changes made after that version would be lost.*
+Et **program** på jeres computer, der holder styr på historikken i en mappe.
 
-*Also, collaborating with other developers or a team is very hard or nearly impossible.*"
-:::
+Virker uden internet. Virker uden konto. Er gratis og open source.
 :::
 
 ::: {.column width="50%"}
+#### GitHub
 
-![](resources/versionkontrol.png)
+En **hjemmeside**, der opbevarer Git-repositories og gør det let at dele dem.
 
+Ejes af Microsoft. Der findes alternativer: GitLab, Bitbucket, Codeberg.
 :::
-
-
 ::::
 
+<br>
 
+# Git i praksis
 
----
+## Første gang: fortæl Git, hvem I er
 
-:::: {.columns}
+Hvert commit bliver stemplet med et navn og en e-mail. Det skal sættes én gang pr. computer:
 
-::: {.column width="50%"}
-::: {style="font-size: 0.8em;"}
-"*A* **centralized version control system** *has a single server that contains all the file versions. This enables multiple clients to simultaneously access files on the server, pull them to their local computer or push them onto the server from their local computer. This way, everyone usually knows what everyone else on the project is doing. Administrators have control over who can do what.*
-
-*This allows for easy collaboration with other developers or a team.*
-
-*The biggest issue with this structure is that everything is stored on the centralized server. If something were to happen to that server, nobody can save their versioned changes, pull files or collaborate at all. Similar to Local Version Control, if the central database became corrupted, and backups haven't been kept, you lose the entire history of the project except whatever single snapshots people happen to have on their local machines.*"
-:::
-:::
-
-::: {.column width="50%"}
-
-![](resources/versionkontrol2.png)
-
-
-:::
-
-
-::::
-
---- 
-
-:::: {.columns}
-
-::: {.column width="50%"}
-::: {style="font-size: 0.8em;"}
-"*With* **distributed version control systems**, *clients don’t just check out the latest snapshot of the files from the server, they fully mirror the repository, including its full history. Thus, everyone collaborating on a project owns a local copy of the whole project, i.e. owns their own local database with their own complete history.*
-
-*With this model, if the server becomes unavailable or dies, any of the client repositories can send a copy of the project's version to any other client or back onto the server when it becomes available. It is enough that one client contains a correct copy which can then easily be further distributed.*"
-:::
-:::
-
-::: {.column width="50%"}
-
-![](resources/versionkontrol3.png)
-
-
-:::
-
-::::
-
----
-
-![](resources/git3.png) 
-
-## Git i praksis
-
-Den “usynlige” .git mappe skaber vi med Git-kommandoen:
-
-::: {style="font-size: 1.5em;"}
+```bash
+git config --global user.name "Dit Navn"
+git config --global user.email "din@mail.dk"
 ```
+
+Tjek, at det virker:
+
+```bash
+git config --global --list
+```
+
+<br>
+
+::: {.aside}
+Glemmer I det, afviser Git jeres første commit med beskeden *Please tell me who you are*. Brug samme e-mail som på jeres GitHub-konto, ellers kan GitHub ikke koble jeres commits til jer.
+:::
+
+## Git gemmer øjebliksbilleder med fingeraftryk
+
+Git gemmer ikke "ændringer". Hver gang I committer, gemmer Git et **øjebliksbillede** af, hvordan filerne så ud og giver indholdet et fingeraftryk på 40 tegn.
+
+::: {.kode-split}
+
+```{pyodide}
+#| autorun: false
+import hashlib
+
+def git_fingeraftryk(tekst):
+    data = tekst.encode("utf-8")
+    hoved = f"blob {len(data)}\0".encode("utf-8")
+    return hashlib.sha1(hoved + data).hexdigest()
+
+print(git_fingeraftryk('print("Første commit")\n'))
+print(git_fingeraftryk('print("Første commit!")\n'))
+print(git_fingeraftryk('print("Første commit")\n'))
+```
+
+:::
+
+::: {.aside}
+Det første tal er præcis det, `git hash-object` giver for en fil med den linje. Python og Git regner det samme ud, fordi det bare er matematik på bytes — alt er tal. Ét udråbstegn mere, og fingeraftrykket er helt anderledes. Derfor kan Git altid se, om noget er ændret.
+:::
+
+## Et repository
+
+Et **repository** er en mappe, Git holder øje med. Der er to måder at få et på:
+
+:::: {.columns}
+::: {.column width="50%"}
+**Start et nyt**
+
+```bash
+cd 1-bid
 git init
 ```
-:::
 
-Kommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.
-
-***I skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:***
-
-::: {style="font-size: 1.5em;"}
-```
-cd <absolut eller relativ stil>
-git init
-```
-:::
-
-## Git i praksis
-
-*Versionsstyringsprocessen med afsæt i .git skelletet består af 3 stadier:*
-
-- **Working Directory:** den mappe, hvor vi kørte git init. Alt der ændres her spores af Git, men det gemmes (committes) ikke automatisk
-- **Staging Area:** De ændringer, som du ønsker registreret i næste commit bliver flyttet til et staging area ved git add .. Det er ikke som sådan et “sted”, men et snarer et “tag” til de filer, som Git skal gemme. Ingen ændringer er blevet gemt endnu.
-- **Repository:** Når vi bruger kommandoen git commit -m "besked" gemmes alt staged data i vores Git-repository og alle ændringer siden sidste commit bliver en permanent del af projektets versionshistorik.
-
-## Fælles øvelse 
-
-:::: {.columns}
-
-::: {.column width="50%"}
-::: {style="font-size: 0.8em;"}
-0. Opret en bruger på GitHub og hent GitHub Desktop
-1. Én i studiegrupper opretter et repository på GitHub
-2. Denne person laver følgende fil med koden: `print("Første commit")`
-3. Den næste kloner repositoriet ned på egen computer
-4. Ændrer koden til: `print("Første commit + anden commit")` og "pusher"
-5. Tredje person gør det samme, tilføjer: `print("Første commit + anden commit + tredje commit")`
-:::
+Laver den skjulte `.git`-mappe. Det er dér, hele historikken bor.
 :::
 
 ::: {.column width="50%"}
+**Hent et, der findes**
 
+```bash
+git clone https://github.com/…
 ```
-1. git pull     📥 (hent seneste ændringer)
-2. Arbejd       💻 (skriv kode)  
-3. git add      📋 (stage ændringer)
-4. git commit   💾 (gem lokalt)
-5. git push     📤 (del med andre)
-```
+
+Henter mappen **og** hele dens historik ned på jeres computer.
 :::
-
 ::::
 
-*Hvis der er tid tilbage, så lav i studiegruppen et repository til jeres mini-projekt.* 
+<br>
 
+::: {.aside}
+Kør `git init` i den rigtige mappe. Kører I den i jeres hjemmemappe, begynder Git at holde øje med *alt* på computeren.
+:::
+
+## De tre stadier
+
+![](resources/fig-tre-stadier.svg){width="88%" fig-align="center"}
+
+::: {.incremental}
+
+- **Working directory**: den mappe, I arbejder i. Git ser, at noget er ændret, men gemmer det ikke af sig selv.
+
+- **Staging area**: det, I har valgt skal med i næste commit. Det er en fil i `.git`-mappen, der hedder `index` — en slags "pakkeliste".
+
+- **Repository**: når I committer, bliver det, der står på pakkelisten, en permanent del af historikken.
+
+:::
+
+## De kommandoer, I skal bruge
+
+| Hvad | Terminalen | VS Code: Source Control |
+|---|---|---|
+| Hvad er ændret? | `git status` | listen over ændrede filer |
+| Læg på pakkelisten | `git add fil.ipynb` | **+** ud for filen |
+| Gem i historikken | `git commit -m "besked"` | skriv beskeden, klik **Commit** |
+| Send op til GitHub | `git push` | **Sync Changes** |
+| Hent andres ændringer | `git pull` | **···** → **Pull** |
+| Se historikken | `git log --oneline` | **Graph** nederst i panelet |
+
+<br>
+
+::: {.aside}
+I behøver ikke terminalen i dag: VS Code kan det hele. Men knapperne kører præcis de samme kommandoer, og når noget går galt, er det kommandoernes fejlbeskeder, I skal kunne læse.
+:::
+
+## Gode commit-beskeder
+
+En commit-besked er en besked til jer selv om tre måneder.
+
+:::: {.columns}
+::: {.column width="50%"}
+**Dårlige**
+
+```
+opdatering
+rettelser
+asdf
+virker nu
+final
+```
+:::
+
+::: {.column width="50%"}
+**Gode**
+
+```
+Tilføj indkomstgrænse til vurder()
+Ret stavefejl i begrundelse
+Tilføj test af familie D
+Læs salg.csv med relativ sti
+```
+:::
+::::
+
+Skriv hvad commit'et **gør**, i bydeform. Én ting pr. commit.
+
+## Notebooks og Git
+
+En notebook er en tekstfil, men den gemmer også **output**: tal, tabeller, figurer. Kører I en celle igen, ændres outputtet og Git tror, filen er ændret.
+
+::: {.incremental}
+
+- Ryd output før I committer: **···** øverst i notebooken → **Clear All Outputs**
+
+- Læg en fil ved navn `.gitignore` i roden af jeres repository. Den fortæller Git, hvad den skal lade være med at holde øje med:
+
+:::
+
+::: {.fragment}
+```
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+data/stor-fil.csv
+```
+:::
+
+::: {.aside}
+Store datafiler hører sjældent hjemme i Git. Og data om personer gør det **aldrig** — heller ikke i et *privat repository*.
+:::
+
+## Arbejdsgangen
+
+1. `git pull`: hent de seneste ændringer
+
+2. Arbejd: skriv kode
+
+3. `git add`: læg ændringerne på pakkelisten
+
+4. `git commit`: gem dem i historikken, lokalt
+
+5. `git push`: del dem med andre
+
+<br>
+
+# Fork og pull request
+
+## At arbejde i andres kode
+
+Man kan ikke pushe direkte til andres repository. I stedet laver man en **fork** (sin egen kopi på GitHub) og beder bagefter ejeren om at trække ændringerne ind. Det kaldes en **pull request**.
+
+Det er sådan, stort set al open source-software bliver til: tusindvis af mennesker, der aldrig har mødt hinanden, sender **pull requests** til hinandens projekter.
+
+![](resources/fig-fork-flow.svg){width="88%" fig-align="center"}
+
+
+
+## Fork eller clone?
+
+| | **Fork** | **Clone** |
+|---|---|---|
+| Hvor sker det? | På GitHub | På jeres computer |
+| Hvad får I? | En kopi under jeres egen konto | En lokal kopi af et repository |
+| Hvornår? | Når I vil ændre i andres projekt | Når I vil arbejde på filerne |
+
+<br>
+
+I workshop-øvelsen gør I begge dele: først fork på GitHub, så clone af **jeres egen fork** ned i VS Code.
+
+::: {.aside}
+Den hyppigste fejl i dag: at clone min udgave i stedet for jeres fork. Så får I *Permission denied*, når I pusher — for I har ikke lov til at skrive i mit repository.
+:::
+
+## Det, der er offentligt, er offentligt
+
+Workshop-projektet er et **offentligt** repository. Alt, hvad I skriver i den, kan læses af alle på internettet ... og det bliver liggende i historikken, også hvis det slettes bagefter.
+
+::: {.incremental}
+
+- Skriv jeres GitHub-brugernavn, ikke jeres fulde navn, hvis I hellere vil det
+
+- Ingen CPR-numre, adresser eller telefonnumre ... **nogensinde**, i noget repository
+
+- Et commit er ikke let at fortryde, når det først er pushet
+
+:::
+
+::: {.fragment}
+Data, der først er delt, er svære at få tilbage. Det vender vi tilbage til.
+:::
+
+# Workshop
+
+## Øvelse 1 (fælles)
+
+<span class="timer" data-time="1500"></span>
+
+Følg arket. Kort fortalt:
+
+1. **Fork** `github.com/jeppeFQ/BID-workshop-projekt`
+2. **Clone** jeres fork i VS Code
+3. Kopiér `deltagere/_skabelon.md` til `deltagere/<jeres-brugernavn>.md`, og udfyld den
+4. **Commit** med en god besked, og **push**
+5. Åbn en **pull request** til mit repository
+
+<br>
+
+## Øvelse 2 (Jeres eget repository)
+
+Det repository, I laver nu, er det, I skal arbejde i resten af kurset.
+
+1. Lav en ny mappe, `1-bid-<brugernavn>`, og læg jeres notebooks fra sidste workshop i den
+
+2. Åbn mappen i VS Code
+
+3. Source Control → **Initialize Repository**
+
+4. Tilføj en `.gitignore` med linjerne fra før
+
+5. Første commit: `Tilføj notebooks fra Python-workshoppen`
+
+6. **Publish Branch** → vælg **private** → VS Code opretter det på GitHub for jer
+
+::: {.aside}
+Vælg *private*. Det er jeres arbejde, og I bestemmer selv, hvem der skal se det. I kan give mig adgang under *Settings → Collaborators*, hvis I vil have feedback.
+:::
 

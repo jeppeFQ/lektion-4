@@ -2,113 +2,155 @@
   {
     "objectID": "index.html#dagens-program",
     "href": "index.html#dagens-program",
-    "title": "Git og versionskontrol",
+    "title": "Lektion 3",
     "section": "Dagens program",
-    "text": "Dagens program\n\nFilsystemer og -hierakier (delvis genopfriskning af de indledende forelæsninger)\nGit (Hvad er det?)\nGit (Hvordan bruger vi det?)\nWorkshop (i studiegrupperne; opsætning af mini-projekter)"
+    "text": "Dagens program\n\nFilsystemet: kort genopfriskning fra lektion 1/2. Det er dét, Git holder øje med\nVersionskontrol: hvad er det, og hvorfor\nGit i praksis: de fem kommandoer, I skal bruge, og det samme i VS Code\nFork og pull request: at arbejde i andres kode\nWorkshop: I henter og tilføjer jer til vores mini-projekt, laver jeres eget repository og fortsætter med Python-øvelserne dér"
   },
   {
-    "objectID": "index.html#lagring-af-data-på-en-computer",
-    "href": "index.html#lagring-af-data-på-en-computer",
-    "title": "Git og versionskontrol",
-    "section": "Lagring af data på en computer",
-    "text": "Lagring af data på en computer\n\nHvad er en fil?"
+    "objectID": "index.html#hvad-er-en-fil",
+    "href": "index.html#hvad-er-en-fil",
+    "title": "Lektion 3",
+    "section": "Hvad er en fil?",
+    "text": "Hvad er en fil?\nEn sekvens af data, gemt som en samlet enhed: tekst, billeder, programmer, notebooks. Og som vi så i lektion 1, under overfladen er det hele bytes.\n\nFilnavn og filendelse, fx projekt.docx\n\nbasenavn: projekt\nendelse: .docx, fortæller hvilken slags data filen indeholder, og hvilket program der skal læse den\n\nMetadata: størrelse i bytes, oprettelses- og ændringsdato, ejer og adgangsrettigheder, osv."
   },
   {
-    "objectID": "index.html#filorganisering",
-    "href": "index.html#filorganisering",
-    "title": "Git og versionskontrol",
-    "section": "Filorganisering",
-    "text": "Filorganisering\n\nSpg.: Hvad vil det sige at filer er organiseret? Hvorfor er det nødvendigt? Og hvordan organisere I filer på jeres computer?"
+    "objectID": "index.html#mapper-er-et-træ",
+    "href": "index.html#mapper-er-et-træ",
+    "title": "Lektion 3",
+    "section": "Mapper er et træ",
+    "text": "Mapper er et træ\nEn mappe er en container til filer og andre mapper. Øverst står roden: / på macOS og Linux, et drevbogstav som C:\\ på Windows.\n\n\nmacOS\n/\n└── Users\n    └── jeppe\n        ├── Desktop\n        ├── Documents\n        │   └── 1-bid\n        │       ├── 01-variable.ipynb\n        │       └── data\n        │           └── salg.csv\n        └── Downloads\n\nWindows\nC:\\\n└── Users\n    └── jeppe\n        ├── Desktop\n        ├── Documents\n        │   └── 1-bid\n        │       ├── 01-variable.ipynb\n        │       └── data\n        │           └── salg.csv\n        └── Downloads"
   },
   {
-    "objectID": "index.html#mapper-grundlaget-for-organiseringen",
-    "href": "index.html#mapper-grundlaget-for-organiseringen",
-    "title": "Git og versionskontrol",
-    "section": "Mapper: grundlaget for organiseringen",
-    "text": "Mapper: grundlaget for organiseringen\n\nEn mappe (directory) er en container, som indeholder filer og andre mapper, og danner grundlaget for en hierakisk struktur (tree-/træstruktur).\n(Træ-)hierakiet giver en logisk og navigérbar organisering på computeren."
+    "objectID": "index.html#absolutte-og-relative-stier",
+    "href": "index.html#absolutte-og-relative-stier",
+    "title": "Lektion 3",
+    "section": "Absolutte og relative stier",
+    "text": "Absolutte og relative stier\nAbsolut sti: fra root-mappen og hele vejen ned:\n/Users/jeppe/Documents/1-bid/data/salg.csv\nC:\\Users\\jeppe\\Documents\\1-bid\\data\\salg.csv\nRelativ sti: fra dér, hvor man står. Står notebooken i 1-bid, er det nok at skrive:\ndata/salg.csv\n\n\nRelative stier er det, der gør et projekt flytbart. En notebook, der læser data/salg.csv, virker også på en andens computer, hvis de har hentet hele mappen 1-bid. En notebook, der læser /Users/jeppe/…, virker kun hos mig. Det bliver afgørende, når I deler kode via Git."
   },
   {
-    "objectID": "index.html#hierakiske-strukturer",
-    "href": "index.html#hierakiske-strukturer",
-    "title": "Git og versionskontrol",
-    "section": "Hierakiske strukturer",
-    "text": "Hierakiske strukturer\n… en hierakisk struktur er derfor den almindelige måde at organisere filer og mapper i operativsystemer i dag.\n\nOpbygningen er med afsæt i en root-mappe, som indeholder undermapper og filer. Herfra indeholder hver undermappe andre undermapper og filer, hvilket danner et træ af mapper og filer, hvis vi zoomer ud.\n\nroot directory: I Unix-systemer (MacOS, Linux) betegnes den /. I Windows er der en root-mappe i hvert drev, betegnet med bogstavet for drevet, fx C:\n\nUndermapper: Mapper, der findes inde i andre mapper, fx /home/user/documents eller C:."
+    "objectID": "index.html#hvor-lægger-i-jeres-filer",
+    "href": "index.html#hvor-lægger-i-jeres-filer",
+    "title": "Lektion 3",
+    "section": "Hvor lægger I jeres filer?",
+    "text": "Hvor lægger I jeres filer?\n\n\nHvordan ser jeres mappestruktur ud til studiet? Kan I finde en fil fra første semester på under ti sekunder?\nHvorfor er skrivebordet et dårligt sted til et kodeprojekt?\n\n\n\nEt hint til det sidste: på mange computere bliver skrivebordet synkroniseret til iCloud eller OneDrive. En synkroniseringstjeneste og Git, der begge prøver at holde styr på de samme filer kan give nogle svært gennemskuelige problemer, der kan koste meget tid på Google/Chatten …"
   },
   {
-    "objectID": "index.html#et-filsystem",
-    "href": "index.html#et-filsystem",
-    "title": "Git og versionskontrol",
-    "section": "Et filsystem",
-    "text": "Et filsystem\n\nUNIX (MacOS, Linux)\n\n/\n├── bin                  # Vigtige eksekverbare systemfiler\n├── sbin                 # Systemadministrative eksekverbare filer\n├── etc                  # Systemkonfigurationsfiler\n├── home                 # Brugermapper (personlige filer)\n│   └── jeppe            # Brugeren \"jeppe\"'s hjemmemappe\n│       ├── Documents    # jeppes dokumenter\n│       ├── Downloads    # jeppes downloadede filer\n│       ├── Music        # jeppes musikfiler\n│       ├── Pictures     # jeppes billeder\n│       ├── Videos       # jeppes videofiler\n│       └── Projects     # Personlige kodeprojekter og scripts\n│           └── snake_game\n│               ├── main.py # Python-kode til et snake-spil\n│               └── assets  # Grafikfiler til spillet\n├── root                 # Superbrugerens hjemmemappe\n├── usr                  # Bruger- og systemprogrammer\n│   ├── bin              # Programmer installeret til brugere\n│   ├── lib              # Systemets biblioteker\n│   └── local            # Lokalt installerede programmer\n├── var                  # Variable data som logs og mails\n│   ├── log              # Systemets logfiler\n│   └── tmp              # Midlertidige filer\n├── tmp                  # Midlertidige filer (slettes ved genstart)\n├── dev                  # Systemets enheder som harddiske og terminaler\n├── mnt                  # Monteringspunkt for midlertidige enheder\n│   └── usb-drive        # En USB-nøgle monteret her\n└── media                # Monteringspunkt for eksterne enheder\n    └── jeppe-usb        # jeppes eksterne harddisk hvis monteret"
-  },
-  {
-    "objectID": "index.html#navigation-absolutte-og-relative-stier",
-    "href": "index.html#navigation-absolutte-og-relative-stier",
-    "title": "Git og versionskontrol",
-    "section": "Navigation: Absolutte og relative stier",
-    "text": "Navigation: Absolutte og relative stier\n\nAbsolut sti: En sti, der beskriver placeringen af en fil eller mappe i forhold til root-mappen. Fx /home/user/documents/projekt.docs eller C:.docx.\nRelativ sti: En sti, der beskriver placeringen af en fil eller mappe i forhold til den nuværende mappe. Hvis vi er i mappen /home/user, kan vi nøjes med den relative sti documents/projekt.docx for at henvise til filen."
-  },
-  {
-    "objectID": "index.html#terminalen-interaktion-med-computeren-og-filsystemet",
-    "href": "index.html#terminalen-interaktion-med-computeren-og-filsystemet",
-    "title": "Git og versionskontrol",
-    "section": "Terminalen: interaktion med computeren (og filsystemet)",
-    "text": "Terminalen: interaktion med computeren (og filsystemet)\nTerminalen er det, der giver os adgang til kommandolinjegrænsefladen (CLI). Selvom den har miste meget af sin position blandt den gennemsnitlige computer-bruger, grundet fremkomsten ad grafiske brugergrænseflader (GUI), er den fortsat en meget effektiv måde at interagere med computeren. Særligt på Unix-systemer."
-  },
-  {
-    "objectID": "index.html#navigation-i-filsystemet-live",
-    "href": "index.html#navigation-i-filsystemet-live",
-    "title": "Git og versionskontrol",
-    "section": "Navigation i filsystemet (live…)",
-    "text": "Navigation i filsystemet (live…)\nEr navigation med CML nødvendigt? Nej. Men det kan give et flow, hvis vi primært laver kodearbejde da terminalen kan tilgås “indeni” programmer som Positron.\n\nSpg.: Hvorfor påstår jeg så at det ikke en god idé ikke at gemme filer på skrivebordet som default?"
-  },
-  {
-    "objectID": "index.html#git-og-organisering-af-arbejde",
-    "href": "index.html#git-og-organisering-af-arbejde",
-    "title": "Git og versionskontrol",
-    "section": "Git og organisering af arbejde",
-    "text": "Git og organisering af arbejde\n\n/projektarbejde\n└──/backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx"
-  },
-  {
-    "objectID": "index.html#versionskontrol",
-    "href": "index.html#versionskontrol",
-    "title": "Git og versionskontrol",
-    "section": "Versionskontrol",
-    "text": "Versionskontrol\nVersionkontrol er et system (software), der holder styr på ændringer af filer over tid, der gør det muligt at genskabe vores tidligere arbejde. Virker for (stort set) alle filer.\nPå større projekter—hvor flere er involveret—er det vigtigt at have kontrol over, hvem der foretager ændringer, hvilke ændringer der er blevet foretaget, og hvordan man kan rulle tilbage til tidligere versioner, hvis noget går galt.\n“[Git] allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and more.”"
-  },
-  {
-    "objectID": "index.html#formål",
-    "href": "index.html#formål",
-    "title": "Git og versionskontrol",
-    "section": "Formål",
-    "text": "Formål\nI et langsigtet perspektiv vil Git hjælpe dig med at holde et projekt organiseret, muliggøre (mere) effektivt samarbejde og sikre, at vi altid har en backup af dine fremskridt.\nTænk på det som en avanceret “fortryd”-funktion for hele projekter.\n\n\n\n/projektarbejde\n└──/backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx\n\n/projektarbejde\n├── .git      &lt;- Git's skjulte data\n└── projekt.docx"
+    "objectID": "index.html#kender-i-den-her",
+    "href": "index.html#kender-i-den-her",
+    "title": "Lektion 3",
+    "section": "Kender I den her?",
+    "text": "Kender I den her?\n/projektarbejde\n└── backup\n    ├── projekt_281024.docx\n    ├── projekt_311024.docx\n    ├── projekt_041224.docx\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final3.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx\n\nHvilken er den nyeste?\nHvad er forskellen på final2 og final3?\nHvem skrev afsnit 4 om, og hvorfor?"
   },
   {
     "objectID": "index.html#versionskontrol-1",
     "href": "index.html#versionskontrol-1",
-    "title": "Git og versionskontrol",
+    "title": "Lektion 3",
     "section": "Versionskontrol",
-    "text": "Versionskontrol\n\n\n\n“A local version control system is a local database located on your local computer, in which every file change is stored as a patch. Every patch set contains only the changes made to the file since its last version. In order to see what the file looked like at any given moment, it is necessary to add up all the relevant patches to the file in order until that given moment.\nThe main problem with this is that everything is stored locally. If anything were to happen to the local database, all the patches would be lost. If anything were to happen to a single version, all the changes made after that version would be lost.\nAlso, collaborating with other developers or a team is very hard or nearly impossible.”"
+    "text": "Versionskontrol\nEt system, der holder styr på ændringer i filer over tid, så man kan komme tilbage til en tidligere udgave.\nMed Git kan man rulle enkelte filer eller hele projektet tilbage, sammenligne udgaver, og se hvem der ændrede hvad og hvornår (Chacon & Straub, Pro Git, kap. 1).\n\n\nFør\n/projektarbejde\n└── backup\n    ├── projekt_final.docx\n    ├── projekt_final2.docx\n    ├── projekt_final_final.docx\n    └── projekt_FINAL.docx\n\nMed Git\n/projektarbejde\n├── .git          ← hele historikken\n└── projekt.docx  ← kun én fil\n\nTænk på det som en fortryd-knap for hele projektet, med en logbog over, hvem der trykkede."
   },
   {
-    "objectID": "index.html#git-i-praksis",
-    "href": "index.html#git-i-praksis",
-    "title": "Git og versionskontrol",
-    "section": "Git i praksis",
-    "text": "Git i praksis\nDen “usynlige” .git mappe skaber vi med Git-kommandoen:\n\ngit init\n\nKommandoen skaber en ny undermappe (.git) og er “skelettet” for vores repository. Denne mappe indeholder alle Git’s interne data, der bruges til at spore og administrere versionshistorikken for dit projekt.\nI skal være opmærksom på hvilken mappe I befinder jer i, når i kører git init. Fremgangen skal være:\n\ncd &lt;absolut eller relativ stil&gt;\ngit init"
+    "objectID": "index.html#tre-måder-at-gøre-det-på",
+    "href": "index.html#tre-måder-at-gøre-det-på",
+    "title": "Lektion 3",
+    "section": "Tre måder at gøre det på",
+    "text": "Tre måder at gøre det på\n\n\nLokal: hver fil får sin historik på din egen maskine. Svært at samarbejde, og dør disken, dør historikken.\nCentral: én server har historikken, alle andre henter derfra. Nemt at samarbejde, indtil serveren går ned.\nDistribueret: alle har en fuld kopi af hele historikken. Git er distribueret."
   },
   {
-    "objectID": "index.html#git-i-praksis-1",
-    "href": "index.html#git-i-praksis-1",
-    "title": "Git og versionskontrol",
-    "section": "Git i praksis",
-    "text": "Git i praksis\nVersionsstyringsprocessen med afsæt i .git skelletet består af 3 stadier:\n\nWorking Directory: den mappe, hvor vi kørte git init. Alt der ændres her spores af Git, men det gemmes (committes) ikke automatisk\nStaging Area: De ændringer, som du ønsker registreret i næste commit bliver flyttet til et staging area ved git add .. Det er ikke som sådan et “sted”, men et snarer et “tag” til de filer, som Git skal gemme. Ingen ændringer er blevet gemt endnu.\nRepository: Når vi bruger kommandoen git commit -m “besked” gemmes alt staged data i vores Git-repository og alle ændringer siden sidste commit bliver en permanent del af projektets versionshistorik."
+    "objectID": "index.html#git-er-ikke-github",
+    "href": "index.html#git-er-ikke-github",
+    "title": "Lektion 3",
+    "section": "Git er ikke GitHub",
+    "text": "Git er ikke GitHub\n\n\nGit\nEt program på jeres computer, der holder styr på historikken i en mappe.\nVirker uden internet. Virker uden konto. Er gratis og open source.\n\nGitHub\nEn hjemmeside, der opbevarer Git-repositories og gør det let at dele dem.\nEjes af Microsoft. Der findes alternativer: GitLab, Bitbucket, Codeberg."
   },
   {
-    "objectID": "index.html#fælles-øvelse",
-    "href": "index.html#fælles-øvelse",
-    "title": "Git og versionskontrol",
-    "section": "Fælles øvelse",
-    "text": "Fælles øvelse\n\n\n\n\nOpret en bruger på GitHub og hent GitHub Desktop\nÉn i studiegrupper opretter et repository på GitHub\nDenne person laver følgende fil med koden: print(\"Første commit\")\nDen næste kloner repositoriet ned på egen computer\nÆndrer koden til: print(\"Første commit + anden commit\") og “pusher”\nTredje person gør det samme, tilføjer: print(\"Første commit + anden commit + tredje commit\")\n\n\n\n1. git pull     📥 (hent seneste ændringer)\n2. Arbejd       💻 (skriv kode)  \n3. git add      📋 (stage ændringer)\n4. git commit   💾 (gem lokalt)\n5. git push     📤 (del med andre)\n\nHvis der er tid tilbage, så lav i studiegruppen et repository til jeres mini-projekt."
+    "objectID": "index.html#første-gang-fortæl-git-hvem-i-er",
+    "href": "index.html#første-gang-fortæl-git-hvem-i-er",
+    "title": "Lektion 3",
+    "section": "Første gang: fortæl Git, hvem I er",
+    "text": "Første gang: fortæl Git, hvem I er\nHvert commit bliver stemplet med et navn og en e-mail. Det skal sættes én gang pr. computer:\ngit config --global user.name \"Dit Navn\"\ngit config --global user.email \"din@mail.dk\"\nTjek, at det virker:\ngit config --global --list\n\n\n\nGlemmer I det, afviser Git jeres første commit med beskeden Please tell me who you are. Brug samme e-mail som på jeres GitHub-konto, ellers kan GitHub ikke koble jeres commits til jer."
+  },
+  {
+    "objectID": "index.html#git-gemmer-øjebliksbilleder-med-fingeraftryk",
+    "href": "index.html#git-gemmer-øjebliksbilleder-med-fingeraftryk",
+    "title": "Lektion 3",
+    "section": "Git gemmer øjebliksbilleder med fingeraftryk",
+    "text": "Git gemmer øjebliksbilleder med fingeraftryk\nGit gemmer ikke “ændringer”. Hver gang I committer, gemmer Git et øjebliksbillede af, hvordan filerne så ud og giver indholdet et fingeraftryk på 40 tegn.\n\n\n\n\n\n\n\n\n\n\n\n\nDet første tal er præcis det, git hash-object giver for en fil med den linje. Python og Git regner det samme ud, fordi det bare er matematik på bytes — alt er tal. Ét udråbstegn mere, og fingeraftrykket er helt anderledes. Derfor kan Git altid se, om noget er ændret."
+  },
+  {
+    "objectID": "index.html#et-repository",
+    "href": "index.html#et-repository",
+    "title": "Lektion 3",
+    "section": "Et repository",
+    "text": "Et repository\nEt repository er en mappe, Git holder øje med. Der er to måder at få et på:\n\n\nStart et nyt\ncd 1-bid\ngit init\nLaver den skjulte .git-mappe. Det er dér, hele historikken bor.\n\nHent et, der findes\ngit clone https://github.com/…\nHenter mappen og hele dens historik ned på jeres computer.\n\n\n\n\nKør git init i den rigtige mappe. Kører I den i jeres hjemmemappe, begynder Git at holde øje med alt på computeren."
+  },
+  {
+    "objectID": "index.html#de-tre-stadier",
+    "href": "index.html#de-tre-stadier",
+    "title": "Lektion 3",
+    "section": "De tre stadier",
+    "text": "De tre stadier\n\n\nWorking directory: den mappe, I arbejder i. Git ser, at noget er ændret, men gemmer det ikke af sig selv.\nStaging area: det, I har valgt skal med i næste commit. Det er en fil i .git-mappen, der hedder index — en slags “pakkeliste”.\nRepository: når I committer, bliver det, der står på pakkelisten, en permanent del af historikken."
+  },
+  {
+    "objectID": "index.html#de-kommandoer-i-skal-bruge",
+    "href": "index.html#de-kommandoer-i-skal-bruge",
+    "title": "Lektion 3",
+    "section": "De kommandoer, I skal bruge",
+    "text": "De kommandoer, I skal bruge\n\n\n\n\n\n\n\n\nHvad\nTerminalen\nVS Code: Source Control\n\n\n\n\nHvad er ændret?\ngit status\nlisten over ændrede filer\n\n\nLæg på pakkelisten\ngit add fil.ipynb\n+ ud for filen\n\n\nGem i historikken\ngit commit -m \"besked\"\nskriv beskeden, klik Commit\n\n\nSend op til GitHub\ngit push\nSync Changes\n\n\nHent andres ændringer\ngit pull\n··· → Pull\n\n\nSe historikken\ngit log --oneline\nGraph nederst i panelet\n\n\n\n\n\n\nI behøver ikke terminalen i dag: VS Code kan det hele. Men knapperne kører præcis de samme kommandoer, og når noget går galt, er det kommandoernes fejlbeskeder, I skal kunne læse."
+  },
+  {
+    "objectID": "index.html#gode-commit-beskeder",
+    "href": "index.html#gode-commit-beskeder",
+    "title": "Lektion 3",
+    "section": "Gode commit-beskeder",
+    "text": "Gode commit-beskeder\nEn commit-besked er en besked til jer selv om tre måneder.\n\n\nDårlige\nopdatering\nrettelser\nasdf\nvirker nu\nfinal\n\nGode\nTilføj indkomstgrænse til vurder()\nRet stavefejl i begrundelse\nTilføj test af familie D\nLæs salg.csv med relativ sti\n\nSkriv hvad commit’et gør, i bydeform. Én ting pr. commit."
+  },
+  {
+    "objectID": "index.html#notebooks-og-git",
+    "href": "index.html#notebooks-og-git",
+    "title": "Lektion 3",
+    "section": "Notebooks og Git",
+    "text": "Notebooks og Git\nEn notebook er en tekstfil, men den gemmer også output: tal, tabeller, figurer. Kører I en celle igen, ændres outputtet og Git tror, filen er ændret.\n\nRyd output før I committer: ··· øverst i notebooken → Clear All Outputs\nLæg en fil ved navn .gitignore i roden af jeres repository. Den fortæller Git, hvad den skal lade være med at holde øje med:\n\n\n.ipynb_checkpoints/\n__pycache__/\n.DS_Store\ndata/stor-fil.csv\n\n\n\nStore datafiler hører sjældent hjemme i Git. Og data om personer gør det aldrig — heller ikke i et privat repository."
+  },
+  {
+    "objectID": "index.html#arbejdsgangen",
+    "href": "index.html#arbejdsgangen",
+    "title": "Lektion 3",
+    "section": "Arbejdsgangen",
+    "text": "Arbejdsgangen\n\ngit pull: hent de seneste ændringer\nArbejd: skriv kode\ngit add: læg ændringerne på pakkelisten\ngit commit: gem dem i historikken, lokalt\ngit push: del dem med andre"
+  },
+  {
+    "objectID": "index.html#at-arbejde-i-andres-kode",
+    "href": "index.html#at-arbejde-i-andres-kode",
+    "title": "Lektion 3",
+    "section": "At arbejde i andres kode",
+    "text": "At arbejde i andres kode\nMan kan ikke pushe direkte til andres repository. I stedet laver man en fork (sin egen kopi på GitHub) og beder bagefter ejeren om at trække ændringerne ind. Det kaldes en pull request.\nDet er sådan, stort set al open source-software bliver til: tusindvis af mennesker, der aldrig har mødt hinanden, sender pull requests til hinandens projekter."
+  },
+  {
+    "objectID": "index.html#fork-eller-clone",
+    "href": "index.html#fork-eller-clone",
+    "title": "Lektion 3",
+    "section": "Fork eller clone?",
+    "text": "Fork eller clone?\n\n\n\n\n\n\n\n\n\nFork\nClone\n\n\n\n\nHvor sker det?\nPå GitHub\nPå jeres computer\n\n\nHvad får I?\nEn kopi under jeres egen konto\nEn lokal kopi af et repository\n\n\nHvornår?\nNår I vil ændre i andres projekt\nNår I vil arbejde på filerne\n\n\n\n\nI workshop-øvelsen gør I begge dele: først fork på GitHub, så clone af jeres egen fork ned i VS Code.\n\n\nDen hyppigste fejl i dag: at clone min udgave i stedet for jeres fork. Så får I Permission denied, når I pusher — for I har ikke lov til at skrive i mit repository."
+  },
+  {
+    "objectID": "index.html#det-der-er-offentligt-er-offentligt",
+    "href": "index.html#det-der-er-offentligt-er-offentligt",
+    "title": "Lektion 3",
+    "section": "Det, der er offentligt, er offentligt",
+    "text": "Det, der er offentligt, er offentligt\nWorkshop-projektet er et offentligt repository. Alt, hvad I skriver i den, kan læses af alle på internettet … og det bliver liggende i historikken, også hvis det slettes bagefter.\n\nSkriv jeres GitHub-brugernavn, ikke jeres fulde navn, hvis I hellere vil det\nIngen CPR-numre, adresser eller telefonnumre … nogensinde, i noget repository\nEt commit er ikke let at fortryde, når det først er pushet\n\n\nData, der først er delt, er svære at få tilbage. Det vender vi tilbage til."
+  },
+  {
+    "objectID": "index.html#øvelse-1-fælles",
+    "href": "index.html#øvelse-1-fælles",
+    "title": "Lektion 3",
+    "section": "Øvelse 1 (fælles)",
+    "text": "Øvelse 1 (fælles)\n\nFølg arket. Kort fortalt:\n\nFork github.com/jeppeFQ/BID-workshop-projekt\nClone jeres fork i VS Code\nKopiér deltagere/_skabelon.md til deltagere/&lt;jeres-brugernavn&gt;.md, og udfyld den\nCommit med en god besked, og push\nÅbn en pull request til mit repository"
+  },
+  {
+    "objectID": "index.html#øvelse-2-jeres-eget-repository",
+    "href": "index.html#øvelse-2-jeres-eget-repository",
+    "title": "Lektion 3",
+    "section": "Øvelse 2 (Jeres eget repository)",
+    "text": "Øvelse 2 (Jeres eget repository)\nDet repository, I laver nu, er det, I skal arbejde i resten af kurset.\n\nLav en ny mappe, 1-bid-&lt;brugernavn&gt;, og læg jeres notebooks fra sidste workshop i den\nÅbn mappen i VS Code\nSource Control → Initialize Repository\nTilføj en .gitignore med linjerne fra før\nFørste commit: Tilføj notebooks fra Python-workshoppen\nPublish Branch → vælg private → VS Code opretter det på GitHub for jer\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVælg private. Det er jeres arbejde, og I bestemmer selv, hvem der skal se det. I kan give mig adgang under Settings → Collaborators, hvis I vil have feedback."
   }
 ]
